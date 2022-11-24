@@ -20,6 +20,8 @@ export class SecretManagerService {
     return new Promise(async (resolve, reject) => {
   
       const { CLOUD_SQL_CREDENTIALS_SECRET } = process.env;
+      console.log('CLOUD_SQL_CREDENTIALS_SECRET: ', CLOUD_SQL_CREDENTIALS_SECRET);
+
       if (!CLOUD_SQL_CREDENTIALS_SECRET) {
         return reject(`Error getting env CLOUD_SQL_CREDENTIALS_SECRET`);
       }
