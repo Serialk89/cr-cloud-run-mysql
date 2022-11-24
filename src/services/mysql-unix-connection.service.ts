@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import mysql from 'promise-mysql';
 import { SecretManagerService } from './secret-manager.service';
+import mysql from 'promise-mysql';
 
 @Injectable()
 export class MysqlUnixConnection {
@@ -18,7 +18,9 @@ export class MysqlUnixConnection {
           queueLimit: 0 // es el numero maximo de solicitudes de conexion en cola, 0 no hay limite
         };
 
-        await this.secretManagerService.settingCredentials();
+        const response = await this.secretManagerService.settingCredentials();
+        console.log('Succesfully getting data to connect mysql', response);
+        console.log(process.env);
 
         const pool = mysql.createPool({
           user: process.env.DB_USER, // e.g. 'my-db-user'
