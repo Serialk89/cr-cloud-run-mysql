@@ -15,6 +15,7 @@ steps:
     - 'DB_NAME=db-nani-food-dev'
     - 'DB_USER=nani-user-db'
     - 'DB_PASS=1aq2sw3de'
+    - 'CLOUD_SQL_CREDENTIALS_SECRET=projects/500573227005/secrets/CLOUD_SQL_CREDENTIALS_SECRET'
 images:
 - gcr.io/${PROJECT_ID}/simple-api-cloudrun-mysql:$COMMIT_SHA
 
