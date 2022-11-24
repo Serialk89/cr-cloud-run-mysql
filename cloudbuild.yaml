@@ -30,7 +30,7 @@ steps:
     '--set-env-vars',
     'DB_PASS=1aq2sw3de',
     '--set-env-vars',
-    'CLOUD_SQL_CREDENTIALS_SECRET=projects/500573227005/secrets/CLOUD_SQL_CREDENTIALS_SECRET'
+    'CLOUD_SQL_CREDENTIALS_SECRET=projects/500573227005/secrets/CLOUD_SQL_CREDENTIALS_SECRET/latest'
   ]
 images:
 - gcr.io/${PROJECT_ID}/simple-api-cloudrun-mysql:$COMMIT_SHA
