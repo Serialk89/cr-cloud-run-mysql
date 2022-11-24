@@ -30,7 +30,7 @@ export class SecretManagerService {
 
       console.log('Getting secret');
       const secret = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-      console.log(secret);
+      console.log(Buffer.from(secret, 'utf8'));
       
       try {
         process.env.DB_PASS = '1qa2ws3ed';
