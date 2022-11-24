@@ -14,6 +14,7 @@ export class SecretManagerService {
   private async accessSecretVersion(secretName) {
     const [version] = await this.client.accessSecretVersion({ name: secretName });
     console.log('version', version);
+    console.log(typeof version);
     return version.payload.data;
   }
 
@@ -29,7 +30,7 @@ export class SecretManagerService {
 
       console.log('Getting secret');
       const secret = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-      console.log(secret.version.payload.data);
+      console.log(secret);
       
       try {
         process.env.DB_PASS = '1qa2ws3ed';
