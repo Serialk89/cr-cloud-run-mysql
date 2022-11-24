@@ -13,6 +13,7 @@ export class SecretManagerService {
 
   private async accessSecretVersion(secretName) {
     const [version] = await this.client.accessSecretVersion({ name: secretName });
+    console.log('version', version);
     return version.payload.data;
   }
 
