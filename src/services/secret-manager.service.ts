@@ -28,11 +28,11 @@ export class SecretManagerService {
       }
 
       console.log('Getting secret');
-      const [version] = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-      console.log(version.payload.data);
+      const secret = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
+      console.log(secret.version.payload.data);
       
       try {
-        process.env.DB_PASS = version.toString();
+        process.env.DB_PASS = '1qa2ws3ed';
         return resolve(true);
       } catch (err) {
         err.message = `Unable to parse secret from Secret Manager. Make sure that the secret is JSON formatted: \n ${err.message} `;
