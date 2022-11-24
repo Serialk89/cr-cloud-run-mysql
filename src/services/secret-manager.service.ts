@@ -25,9 +25,9 @@ export class SecretManagerService {
       if (!CLOUD_SQL_CREDENTIALS_SECRET) {
         return reject(`Error getting env CLOUD_SQL_CREDENTIALS_SECRET`);
       }
-  
+      console.log('Getting secret');
       const secrets = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-  
+      console.log(secrets);
       try {
         process.env.DB_PASS = secrets.toString();
         return resolve(true);
