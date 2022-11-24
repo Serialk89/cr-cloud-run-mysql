@@ -20,7 +20,7 @@ export class SecretManagerService {
 
   settingCredentials(): Promise<any> {
     return new Promise(async (resolve, reject) => {
-  
+
       const { CLOUD_SQL_CREDENTIALS_SECRET } = process.env;
       console.log('CLOUD_SQL_CREDENTIALS_SECRET: ', CLOUD_SQL_CREDENTIALS_SECRET);
 
@@ -30,10 +30,10 @@ export class SecretManagerService {
 
       console.log('Getting secret');
       const secret = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-      console.log(Buffer.from(secret, 'utf8'));
-      
+      const pass = Buffer.from(secret, 'utf8').toString();
+      console.log('a: ', pass);
       try {
-        process.env.DB_PASS = '1qa2ws3ed';
+        process.env.DB_PASS = pass;
         return resolve(true);
       } catch (err) {
         err.message = `Unable to parse secret from Secret Manager. Make sure that the secret is JSON formatted: \n ${err.message} `;
