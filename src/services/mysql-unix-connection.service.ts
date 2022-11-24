@@ -28,10 +28,10 @@ export class MysqlUnixConnection {
           // Specify additional properties here.
           ...config,
         });
-        resolve(pool);
+        return resolve(pool);
       } catch (error) {
         console.error(error);
-        reject('Error trying to create pool');
+        return reject(error);
       }
     });
   };

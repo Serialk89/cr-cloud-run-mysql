@@ -21,17 +21,17 @@ export class SecretManagerService {
   
       const { CLOUD_SQL_CREDENTIALS_SECRET } = process.env;
       if (!CLOUD_SQL_CREDENTIALS_SECRET) {
-        reject(`Error getting env CLOUD_SQL_CREDENTIALS_SECRET`);
+        return reject(`Error getting env CLOUD_SQL_CREDENTIALS_SECRET`);
       }
   
       const secrets = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
   
       try {
         process.env.DB_PASS = secrets.toString();
-        resolve(true);
+        return resolve(true);
       } catch (err) {
         err.message = `Unable to parse secret from Secret Manager. Make sure that the secret is JSON formatted: \n ${err.message} `;
-        reject(err);
+        return reject(err);
       }
     });
   }

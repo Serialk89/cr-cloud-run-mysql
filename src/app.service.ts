@@ -7,13 +7,19 @@ export class AppService {
   constructor(private mysqlService: MysqlUnixConnection) { }
   async getHello(): Promise<any> {
     return new Promise(async (resolve, reject) => {
-      const pool = await this.mysqlService.createUnixSocketPool();
-      const stmt = 'SELECT COUNT(vote_id) as count FROM votes WHERE candidate=?';
-      const tabsQuery = pool.query(stmt, ['TABS']);
-      const spacesQuery = pool.query(stmt, ['SPACES']);
-      return {
-        tabsQuery, spacesQuery
-      };
+      try {
+        const pool = await this.mysqlService.createUnixSocketPool();
+        const stmt = 'SELECT COUNT(vote_id) as count FROM votes WHERE candidate=?';
+        const tabsQuery = pool.query(stmt, ['TABS']);
+        const spacesQuery = pool.query(stmt, ['SPACES']);
+        return resolve({
+          tabsQuery, spacesQuery
+        });
+      } catch (error) {
+        console.log(error);
+        return reject(error);
+      }
+
     });
   }
 }
