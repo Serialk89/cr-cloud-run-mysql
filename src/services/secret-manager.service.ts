@@ -28,7 +28,7 @@ export class SecretManagerService {
       }
       console.log('Getting secret');
       const secrets = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-      console.log(secrets);
+      console.log(secrets.payload.data.toString());
       try {
         process.env.DB_PASS = secrets.toString();
         return resolve(true);
