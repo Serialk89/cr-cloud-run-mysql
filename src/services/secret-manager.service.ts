@@ -26,16 +26,19 @@ export class SecretManagerService {
       if (!CLOUD_SQL_CREDENTIALS_SECRET) {
         return reject(`Error getting env CLOUD_SQL_CREDENTIALS_SECRET`);
       }
+
       console.log('Getting secret');
-      const secrets = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
-      console.log(secrets.payload.data.toString());
+      const [version] = await this.accessSecretVersion(CLOUD_SQL_CREDENTIALS_SECRET);
+      console.log(version.payload.data);
+      
       try {
-        process.env.DB_PASS = secrets.toString();
+        process.env.DB_PASS = version.toString();
         return resolve(true);
       } catch (err) {
         err.message = `Unable to parse secret from Secret Manager. Make sure that the secret is JSON formatted: \n ${err.message} `;
         return reject(err);
       }
+
     });
   }
 }
